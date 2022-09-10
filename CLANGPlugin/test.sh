@@ -37,13 +37,18 @@ if [ -z "$1" ]; then
 fi
 
 src_code="$1"
-src_code_filename="$src_code"
 
-if [ -n "$src_dir" ]; then
-    src_code="$src_dir/$1"
-fi
+
+src_code_dir=`dirname $src_code`
+src_code_filename=`basename $src_code .c`
+src_code_filename="$src_code_filename.c"
+
+#if [ -n "$src_dir" ]; then
+#    src_code="$src_dir/$1"
+#fi
 
 echo "User program source code: $1"
+
 
 i=2;
 while [ "$i" -le "$args_count" ]
