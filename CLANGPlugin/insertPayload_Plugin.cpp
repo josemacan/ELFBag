@@ -48,6 +48,9 @@ struct payloadhdr_lines{
 Rewriter rewriter;
 vector<string> global_args;
 
+// Limits
+#define MAX_ARGUMENTS 4     // Max amount of arguments to be passed to the plugin
+
 // Function declarations
 
 void payload_Binary_fill(int , uint8_t* , string & , long );
@@ -179,6 +182,11 @@ protected:
 };
 
 string getMetadataLines(vector<string> args){
+
+    if(args.size() > MAX_ARGUMENTS){
+        cout << "ERROR - La cantidad de argumentos pasado como archivo " << args.size() << " es mayor al valor permitido: " << MAX_ARGUMENTS << "\n", 
+        exit(EXIT_FAILURE);
+    }
 
     payload_lines* pay_lines_array = new payload_lines[args.size()]();
     payloadhdr_lines* payhdr_lines_array = new payloadhdr_lines[args.size()]();
